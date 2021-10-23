@@ -14,5 +14,32 @@ public class Car {
         this.age = age;
     }
 
+    public String getModel() {
+        return model;
+    }
 
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public int getSeries() {
+        return series;
+    }
+
+    public void setSeries(int series) {
+        this.series = series;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    @Override
+    public String toString() {
+        return model + "," + series + "," + age ;
+    }
 }
