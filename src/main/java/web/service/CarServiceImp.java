@@ -26,7 +26,7 @@ public class CarServiceImp implements CarService {
             return cars;
         } else {
             return cars.subList(0, count);
-        } //list.stream().limit(count).toList();
+        }
     }
 }
 
