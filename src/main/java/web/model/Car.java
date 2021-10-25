@@ -40,6 +40,6 @@ public class Car {
 
     @Override
     public String toString() {
-        return model + "," + series + "," + age ;
+        return model + " , "  + series + " , "  + age ;
     }
 }
