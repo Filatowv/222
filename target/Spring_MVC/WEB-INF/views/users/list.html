@@ -1,26 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>User Info</title>
 </head>
 <body>
+<h2>Users List</h2>
 <table th:border ="1">
+    <thead>
     <tr>
-        <th>Username</th>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
     </tr>
+    </thead>
+    <tbody>
     <tr th:each="user: ${listUsers}">
-        <td th:text="${user.getFirstName()}">Username</td>
+        <td th:text="${user.getId()}">Id</td>
+        <td th:text="${user.getFirstName()}">User_Name</td>
+        <td th:text="${user.getLastName()}">Last_Name</td>
+        <td th:text="${user.getAge()}">Age</td>
         <td><a th:href="@{/users/{id}(id=${user.getId()})}">Info</a></td>
         <td><a th:href="@{/users/{id}/edit(id=${user.getId()})}">Edit</a></td>
-        <!--<td><a th:href="@{/users/delete={id}(id=${user.getId()})}">Delete</a></td>-->
+
     </tr>
+    </tbody>
+</table>
+<br>
     <form th:method="get" th:action="@{/users/new}">
         <input type="submit" value="New User">
     </form><br>
-
-
-</table>
 
 
 

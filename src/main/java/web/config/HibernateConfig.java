@@ -16,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+
 @Configuration
 @EnableWebMvc
 @EnableTransactionManagement
@@ -25,6 +26,7 @@ public class HibernateConfig {
 
 
     private final Environment env;
+
 
     @Autowired
     public HibernateConfig(Environment env) {
@@ -39,9 +41,9 @@ public class HibernateConfig {
         dataSource.setUrl(env.getRequiredProperty("db.url"));
         dataSource.setUsername(env.getRequiredProperty("db.username"));
         dataSource.setPassword(env.getRequiredProperty("db.password"));
-
         return dataSource;
     }
+
 
     @Bean
     LocalContainerEntityManagerFactoryBean entityManagerFactory() {
@@ -49,15 +51,20 @@ public class HibernateConfig {
         emFactory.setDataSource(dataSource());
         emFactory.setPackagesToScan("web");
         emFactory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        emFactory.setJpaProperties(getHibernateProperties());
+        return emFactory;
+    }
 
+
+    public Properties getHibernateProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", env.getRequiredProperty("hibernate.hbm2ddl.auto"));
         properties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
-        emFactory.setJpaProperties(properties);
-
-        return emFactory;
+        properties.put("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
+        return properties;
     }
+
 
     @Bean
     JpaTransactionManager transactionManager() {
